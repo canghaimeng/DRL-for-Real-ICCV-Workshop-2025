@@ -1,1 +1,107 @@
-<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+<h2>Evaluation Details for DRL for Real Competition</h2>
+
+<p>The DRL for Real competition evaluates disentangled representation learning methods based on their performance on real-world datasets. Our evaluation framework is designed to assess both the theoretical properties of disentanglement and the practical utility of the learned representations in real-world applications.</p>
+
+<h3>Evaluation Metrics</h3>
+
+<ol>
+  <li><strong>Disentanglement Score (25%)</strong>
+    <ul>
+      <li>Measures how well the model separates different factors of variation in the data</li>
+      <li>Evaluated using established disentanglement metrics:
+        <ul>
+          <li><em>MIG (Mutual Information Gap):</em> Measures the difference in mutual information between the top two variables with highest mutual information with each ground truth factor</li>
+          <li><em>DCI (Disentanglement, Completeness, Informativeness):</em> Evaluates how well individual latent units capture individual factors of variation</li>
+          <li><em>SAP (Separated Attribute Predictability):</em> Measures the difference in the prediction error of the two most predictive latent variables for each factor</li>
+        </ul>
+      </li>
+      <li>Higher scores indicate better separation of factors</li>
+    </ul>
+  </li>
+  
+  <li><strong>Robustness Score (25%)</strong>
+    <ul>
+      <li>Evaluates model performance under different real-world conditions and perturbations</li>
+      <li>Tests include:
+        <ul>
+          <li><em>Domain Shifts:</em> Performance when factors appear in new combinations or contexts</li>
+          <li><em>Noise Robustness:</em> Stability of representations when input data contains noise</li>
+          <li><em>Occlusion Handling:</em> Performance when parts of the input are occluded or missing</li>
+        </ul>
+      </li>
+      <li>Measures how well disentangled representations maintain their properties under these challenging conditions</li>
+    </ul>
+  </li>
+  
+  <li><strong>Interpretability Score (20%)</strong>
+    <ul>
+      <li>Assesses how easily humans can understand the learned representations</li>
+      <li>Evaluated through:
+        <ul>
+          <li><em>Visualization Quality:</em> How clearly the model can visualize changes in individual factors</li>
+          <li><em>Semantic Alignment:</em> How well the discovered factors align with human-understandable concepts</li>
+          <li><em>Human Understanding:</em> Measured through proxy tasks where humans identify the meaning of each disentangled factor</li>
+        </ul>
+      </li>
+      <li>Includes metrics for semantic meaningfulness of the disentangled factors</li>
+    </ul>
+  </li>
+  
+  <li><strong>Practical Utility Score (30%)</strong>
+    <ul>
+      <li>Measures the usefulness of disentangled representations in downstream tasks</li>
+      <li>Tasks include:
+        <ul>
+          <li><em>Classification Performance:</em> Accuracy on downstream classification tasks using the learned representations</li>
+          <li><em>Generation Quality:</em> Ability to generate new samples with controlled factor manipulation</li>
+          <li><em>Manipulation Effectiveness:</em> Precision in editing specific attributes while preserving others</li>
+          <li><em>Computational Efficiency:</em> Resource requirements and inference speed</li>
+        </ul>
+      </li>
+      <li>Evaluates performance improvements compared to non-disentangled baselines</li>
+      <li>Considers computational efficiency and scalability to real-world applications</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Evaluation Process</h3>
+
+<p>The evaluation process consists of the following steps:</p>
+
+<ol>
+  <li><strong>Submission:</strong> Participants submit their models and code for evaluation</li>
+  <li><strong>Verification:</strong> Submissions are verified for compatibility with the evaluation framework</li>
+  <li><strong>Execution:</strong> Models are executed on the evaluation server using the provided datasets</li>
+  <li><strong>Metric Calculation:</strong>
+    <ul>
+      <li>Disentanglement metrics are calculated using ground truth factors</li>
+      <li>Robustness is evaluated by applying various perturbations to test inputs</li>
+      <li>Interpretability is assessed through automated proxy measures</li>
+      <li>Practical utility is measured through performance on downstream tasks</li>
+    </ul>
+  </li>
+  <li><strong>Scoring:</strong> A weighted sum of the metrics determines the final score:
+    <ul>
+      <li>Total Score = 0.25 × Disentanglement + 0.25 × Robustness + 0.20 × Interpretability + 0.30 × Practical Utility</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Development vs. Test Phase Evaluation</h3>
+
+<p><strong>Development Phase (January 15 - August 15, 2025):</strong></p>
+<ul>
+  <li>Models are evaluated on validation data with known factors of variation</li>
+  <li>Feedback is provided on all four metrics to help participants improve their models</li>
+  <li>Leaderboard is private to encourage exploration of different approaches</li>
+</ul>
+
+<p><strong>Test Phase (August 16 - October 15, 2025):</strong></p>
+<ul>
+  <li>Models are evaluated on unseen test data with more challenging scenarios</li>
+  <li>Test data includes more complex real-world examples with ambiguous factors</li>
+  <li>A generalization penalty is applied to simulate real-world deployment challenges</li>
+  <li>Leaderboard is public, showing the performance of all participants</li>
+</ul>
+
+<p>The evaluation emphasizes practical utility and real-world applicability, reflecting our workshop's focus on making disentangled representation learning truly useful for real-world applications. The most successful approaches will be those that not only achieve high disentanglement scores in controlled settings but also maintain their performance in challenging real-world scenarios.</p>

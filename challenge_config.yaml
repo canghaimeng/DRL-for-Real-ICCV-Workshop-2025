@@ -1,37 +1,47 @@
 # If you are not sure what all these fields mean, please refer our documentation here:
 # https://evalai.readthedocs.io/en/latest/configuration.html
-title: Random Number Generator Challenge
-short_description: Random number generation challenge for each submission
+title: DRL for Real ICCV Workshop 2025
+short_description: Disentangled Representation Learning for Real-world Applications
 description: templates/description.html
 evaluation_details: templates/evaluation_details.html
 terms_and_conditions: templates/terms_and_conditions.html
-image: logo.jpg
+image: logo.svg
 submission_guidelines: templates/submission_guidelines.html
-leaderboard_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras egestas a libero nec sagittis.
+leaderboard_description: Leaderboard for the DRL for Real competition, evaluating disentangled representation learning methods on realistic datasets. Models are ranked based on their performance in disentanglement, robustness, interpretability, and practical utility in real-world applications.
 evaluation_script: evaluation_script.zip
 remote_evaluation: False
-start_date: 2019-01-01 00:00:00
-end_date: 2099-05-31 23:59:59
+start_date: 2025-01-15 00:00:00
+end_date: 2025-10-31 23:59:59
 published: True
 tags: 
-  - random-number-generation
+  - disentangled-representation-learning
+  - representation-learning
   - machine-learning
-  - data-science
   - computer-vision
+  - interpretability
+  - generative-models
 leaderboard:
   - id: 1
     schema:
       {
-        "labels": ["Metric1", "Metric2", "Metric3", "Total"],
+        "labels": ["Disentanglement", "Robustness", "Interpretability", "Practical Utility", "Total"],
         "default_order_by": "Total",
         "metadata": {
-          "Metric1": {
-            "sort_ascending": True,
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "Disentanglement": {
+            "sort_ascending": False,
+            "description": "Measures how well the model separates different factors of variation in the data.",
           },
-          "Metric2": {
-            "sort_ascending": True,
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "Robustness": {
+            "sort_ascending": False,
+            "description": "Evaluates model performance under different real-world conditions and perturbations.",
+          },
+          "Interpretability": {
+            "sort_ascending": False,
+            "description": "Assesses how easily humans can understand the learned representations.",
+          },
+          "Practical Utility": {
+            "sort_ascending": False,
+            "description": "Measures the practical usefulness of the disentangled representations in downstream tasks.",
           }
         }
       }
@@ -48,8 +58,8 @@ challenge_phases:
     allowed_email_ids: []
     disable_logs: False
     is_submission_public: True
-    start_date: 2019-01-19 00:00:00
-    end_date: 2099-04-25 23:59:59
+    start_date: 2025-01-15 00:00:00
+    end_date: 2025-08-15 23:59:59
     test_annotation_file: annotations/test_annotations_devsplit.json
     codename: dev
     max_submissions_per_day: 5
@@ -95,8 +105,8 @@ challenge_phases:
     allowed_email_ids: []
     disable_logs: False
     is_submission_public: True
-    start_date: 2019-01-01 00:00:00
-    end_date: 2099-05-24 23:59:59
+    start_date: 2025-08-16 00:00:00
+    end_date: 2025-10-15 23:59:59
     test_annotation_file: annotations/test_annotations_testsplit.json
     codename: test
     max_submissions_per_day: 5
@@ -152,7 +162,7 @@ challenge_phase_splits:
     visibility: 3
     leaderboard_decimal_precision: 2
     is_leaderboard_order_descending: True
-    showeceution_time: False
+    show_execution_time: False
     show_leaderboard_by_latest_submission: False
   - challenge_phase_id: 2
     leaderboard_id: 1
