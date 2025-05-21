@@ -1,29 +1,68 @@
 <h2>Submission Guidelines for DRL for Real Competition</h2>
 
-<p>This competition focuses on developing and evaluating disentangled representation learning (DRL) methods on realistic datasets. Participants are expected to submit their models and results following these guidelines:</p>
+<p>This competition focuses on developing and evaluating disentangled representation learning (DRL) methods on realistic datasets. The competition is divided into two main tracks: Single-Factor and Multi-Factor. Participants are expected to submit their models and results following these guidelines:</p>
 
-<h3>Submission Requirements</h3>
+<h3>Track-Specific Submission Requirements</h3>
 
+<h4>1. Single-Factor Track</h4>
 <ol>
-  <li><strong>Model Submission</strong>: Submit your trained model along with the code used for training and evaluation. The model should be capable of learning disentangled representations from the provided datasets.</li>
-  <li><strong>Documentation</strong>: Include a detailed description of your approach, highlighting the key innovations and how your method addresses the challenges of applying DRL to real-world data.</li>
-  <li><strong>Results</strong>: Provide quantitative results on the evaluation metrics (Disentanglement, Robustness, Interpretability, and Practical Utility).</li>
-  <li><strong>Visualization</strong>: Include visualizations that demonstrate the disentangled nature of your learned representations.</li>
+  <li><strong>Model Submission</strong>: Submit your disentangled model along with the code used for training and evaluation. The model must be capable of learning disentangled representations from the provided single-factor variation dataset.</li>
+  <li><strong>Documentation</strong>: Include a detailed description of your approach, highlighting how your method achieves disentanglement for single-factor variations.</li>
+  <li><strong>Results</strong>: Provide quantitative results on FID and Bi-directional DCI metrics.</li>
+  <li><strong>Visualization</strong>: Include visualizations that demonstrate the disentangled nature of your learned representations and the quality of generated images.</li>
+</ol>
+
+<h4>2. Multi-Factor Track - General Image Dataset</h4>
+<ol>
+  <li><strong>Model Submission</strong>: Submit your model along with the code used for training and evaluation.</li>
+  <li><strong>Documentation</strong>: Include a detailed description of your approach, specifying whether you're targeting the Main Leaderboard, the Disentanglement Leaderboard, or both.</li>
+  <li><strong>Results</strong>: 
+    <ul>
+      <li>For Main Leaderboard: Provide examples of text-to-image generation with controlled attribute manipulation</li>
+      <li>For Disentanglement Leaderboard: Provide quantitative results on FID and Bi-directional DCI metrics</li>
+    </ul>
+  </li>
+  <li><strong>Visualization</strong>: Include visualizations that demonstrate your model's ability to generate images with specific attribute changes.</li>
+</ol>
+
+<h4>3. Multi-Factor Track - Autonomous Driving Dataset</h4>
+<ol>
+  <li><strong>Model Submission</strong>: Submit your model along with the code used for training and evaluation.</li>
+  <li><strong>Documentation</strong>: Include a detailed description of your approach, specifying whether you're targeting the Main Leaderboard, the Disentanglement Leaderboard, or both.</li>
+  <li><strong>Results</strong>: 
+    <ul>
+      <li>For Main Leaderboard: Provide examples of cross-view image generation and SSIM scores</li>
+      <li>For Disentanglement Leaderboard: Provide quantitative results on FID and Bi-directional DCI metrics</li>
+    </ul>
+  </li>
+  <li><strong>Visualization</strong>: Include visualizations that demonstrate your model's ability to generate images from different camera viewpoints and time points.</li>
 </ol>
 
 <h3>Evaluation Criteria</h3>
 
-<p>Submissions will be evaluated based on the following criteria:</p>
+<p>Submissions will be evaluated based on track-specific criteria:</p>
 
 <ul>
-  <li><strong>Disentanglement</strong>: How well does your model separate different factors of variation in the data?</li>
-  <li><strong>Robustness</strong>: How well does your model perform under different real-world conditions and perturbations?</li>
-  <li><strong>Interpretability</strong>: How easily can humans understand the learned representations?</li>
-  <li><strong>Practical Utility</strong>: How useful are the disentangled representations for downstream tasks?</li>
+  <li><strong>Single-Factor Track:</strong>
+    <ul>
+      <li><em>Image Generation Quality (50%):</em> Measured using FID</li>
+      <li><em>Disentanglement Quality (50%):</em> Evaluated using Bi-directional DCI</li>
+    </ul>
+  </li>
+  <li><strong>Multi-Factor Track - General Image Dataset:</strong>
+    <ul>
+      <li><em>Main Leaderboard:</em> LLM+VQA evaluation approach</li>
+      <li><em>Disentanglement Leaderboard:</em> FID (50%) and Bi-directional DCI (50%)</li>
+    </ul>
+  </li>
+  <li><strong>Multi-Factor Track - Autonomous Driving Dataset:</strong>
+    <ul>
+      <li><em>Main Leaderboard:</em> SSIM between generated images and ground truth</li>
+      <li><em>Disentanglement Leaderboard:</em> FID (50%) and Bi-directional DCI (50%)</li>
+    </ul>
+  </li>
 </ul>
-
-<p>The final ranking will be determined by the weighted sum of these metrics, with an emphasis on practical utility and real-world applicability.</p>
 
 <h3>Submission Format</h3>
 
-<p>Please submit your files in one of the following formats: .zip, .tar.gz, or through a GitHub repository link. Ensure that your submission includes all necessary code, models, and documentation as specified above.</p>
+<p>Please submit your files in one of the following formats: .zip, .tar.gz, or through a GitHub repository link. Ensure that your submission includes all necessary code, models, and documentation as specified above. Clearly indicate which track(s) and leaderboard(s) you are submitting to.</p>

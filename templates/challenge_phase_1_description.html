@@ -23,12 +23,27 @@
       <li>Receive feedback on model performance in terms of disentanglement, robustness, interpretability, and practical utility</li>
     </ul>
   </li>
-  <li><strong>Evaluation Criteria:</strong> Same as the Test Phase
+  <li><strong>Evaluation Criteria:</strong>
+    <p>Evaluation criteria vary by track:</p>
     <ul>
-      <li><em>Disentanglement (25%):</em> How well the model separates different factors of variation</li>
-      <li><em>Robustness (25%):</em> How well the representations maintain their properties under perturbations</li>
-      <li><em>Interpretability (20%):</em> How easily humans can understand the learned representations</li>
-      <li><em>Practical Utility (30%):</em> How useful the representations are for downstream tasks</li>
+      <li><strong>Single-Factor Track:</strong>
+        <ul>
+          <li><em>Image Generation Quality (50%):</em> Measured using FID</li>
+          <li><em>Disentanglement Quality (50%):</em> Evaluated using Bi-directional DCI</li>
+        </ul>
+      </li>
+      <li><strong>Multi-Factor Track - General Image Dataset:</strong>
+        <ul>
+          <li><em>Main Leaderboard:</em> LLM+VQA evaluation approach</li>
+          <li><em>Disentanglement Leaderboard:</em> FID (50%) and Bi-directional DCI (50%)</li>
+        </ul>
+      </li>
+      <li><strong>Multi-Factor Track - Autonomous Driving Dataset:</strong>
+        <ul>
+          <li><em>Main Leaderboard:</em> SSIM between generated images and ground truth</li>
+          <li><em>Disentanglement Leaderboard:</em> FID (50%) and Bi-directional DCI (50%)</li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>

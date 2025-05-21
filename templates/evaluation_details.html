@@ -2,67 +2,83 @@
 
 <p>The DRL for Real competition evaluates disentangled representation learning methods based on their performance on real-world datasets. Our evaluation framework is designed to assess both the theoretical properties of disentanglement and the practical utility of the learned representations in real-world applications.</p>
 
-<h3>Evaluation Metrics</h3>
+<h3>Track-Specific Evaluation Metrics</h3>
 
-<ol>
-  <li><strong>Disentanglement Score (25%)</strong>
+<h4>1. Single-Factor Track Evaluation</h4>
+
+<p>In the Single-Factor Track, participants must use disentangled models. Evaluation is based on two equally weighted components:</p>
+
+<ul>
+  <li><strong>Image Generation Quality (50%)</strong>
     <ul>
-      <li>Measures how well the model separates different factors of variation in the data</li>
-      <li>Evaluated using established disentanglement metrics:
-        <ul>
-          <li><em>MIG (Mutual Information Gap):</em> Measures the difference in mutual information between the top two variables with highest mutual information with each ground truth factor</li>
-          <li><em>DCI (Disentanglement, Completeness, Informativeness):</em> Evaluates how well individual latent units capture individual factors of variation</li>
-          <li><em>SAP (Separated Attribute Predictability):</em> Measures the difference in the prediction error of the two most predictive latent variables for each factor</li>
-        </ul>
-      </li>
-      <li>Higher scores indicate better separation of factors</li>
+      <li>Measured using FID (Fréchet Inception Distance)</li>
+      <li>Lower FID scores indicate better quality of generated images</li>
+      <li>Evaluates how well the generated images match the distribution of real images</li>
     </ul>
   </li>
   
-  <li><strong>Robustness Score (25%)</strong>
+  <li><strong>Disentanglement Quality (50%)</strong>
     <ul>
-      <li>Evaluates model performance under different real-world conditions and perturbations</li>
-      <li>Tests include:
+      <li>Evaluated using Bi-directional DCI, an extension of the traditional DCI metric</li>
+      <li>Components of Bi-directional DCI:
         <ul>
-          <li><em>Domain Shifts:</em> Performance when factors appear in new combinations or contexts</li>
-          <li><em>Noise Robustness:</em> Stability of representations when input data contains noise</li>
-          <li><em>Occlusion Handling:</em> Performance when parts of the input are occluded or missing</li>
+          <li><em>Forward DCI:</em> Measures how well individual latent units capture individual factors of variation</li>
+          <li><em>Backward DCI:</em> Measures how perturbations in real images affect the corresponding latent variables in the encoder</li>
         </ul>
       </li>
-      <li>Measures how well disentangled representations maintain their properties under these challenging conditions</li>
+      <li>Higher scores indicate better disentanglement of factors in both generation and encoding</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>2. Multi-Factor Track Evaluation</h4>
+
+<h5>2.1 General Image Dataset</h5>
+
+<p>This sub-track has two separate leaderboards with different evaluation metrics:</p>
+
+<ul>
+  <li><strong>Main Leaderboard (All Methods)</strong>
+    <ul>
+      <li>Uses LLM+VQA evaluation approach:</li>
+      <li>Step 1: VQA assessment determines if models correctly generate images with attributes specified in given text</li>
+      <li>Step 2: LLM evaluates attribute strength in a set of generated images</li>
+      <li>Step 3: Comparison between text-specified attribute changes and LLM-detected attribute changes</li>
+      <li>Final score is calculated as the ratio of intended attribute changes to total detected attribute changes</li>
+      <li>Scores closer to 1 indicate better performance (minimal unintended attribute changes)</li>
     </ul>
   </li>
   
-  <li><strong>Interpretability Score (20%)</strong>
+  <li><strong>Disentanglement Leaderboard (Disentangled Methods Only)</strong>
     <ul>
-      <li>Assesses how easily humans can understand the learned representations</li>
-      <li>Evaluated through:
-        <ul>
-          <li><em>Visualization Quality:</em> How clearly the model can visualize changes in individual factors</li>
-          <li><em>Semantic Alignment:</em> How well the discovered factors align with human-understandable concepts</li>
-          <li><em>Human Understanding:</em> Measured through proxy tasks where humans identify the meaning of each disentangled factor</li>
-        </ul>
-      </li>
-      <li>Includes metrics for semantic meaningfulness of the disentangled factors</li>
+      <li>Uses the same metrics as the Single-Factor Track:</li>
+      <li>Image Generation Quality (50%): Measured using FID</li>
+      <li>Disentanglement Quality (50%): Evaluated using Bi-directional DCI</li>
+    </ul>
+  </li>
+</ul>
+
+<h5>2.2 Autonomous Driving Dataset</h5>
+
+<p>This sub-track also has two separate leaderboards:</p>
+
+<ul>
+  <li><strong>Main Leaderboard (All Methods)</strong>
+    <ul>
+      <li>Task: Given images from one camera viewpoint, generate images for other viewpoints and time points</li>
+      <li>Evaluation: Uses SSIM (Structural Similarity Index Measure) to quantify the similarity between generated images and ground truth</li>
+      <li>Higher SSIM scores indicate better reconstruction quality</li>
     </ul>
   </li>
   
-  <li><strong>Practical Utility Score (30%)</strong>
+  <li><strong>Disentanglement Leaderboard (Disentangled Methods Only)</strong>
     <ul>
-      <li>Measures the usefulness of disentangled representations in downstream tasks</li>
-      <li>Tasks include:
-        <ul>
-          <li><em>Classification Performance:</em> Accuracy on downstream classification tasks using the learned representations</li>
-          <li><em>Generation Quality:</em> Ability to generate new samples with controlled factor manipulation</li>
-          <li><em>Manipulation Effectiveness:</em> Precision in editing specific attributes while preserving others</li>
-          <li><em>Computational Efficiency:</em> Resource requirements and inference speed</li>
-        </ul>
-      </li>
-      <li>Evaluates performance improvements compared to non-disentangled baselines</li>
-      <li>Considers computational efficiency and scalability to real-world applications</li>
+      <li>Uses the same metrics as the Single-Factor Track:</li>
+      <li>Image Generation Quality (50%): Measured using FID</li>
+      <li>Disentanglement Quality (50%): Evaluated using Bi-directional DCI</li>
     </ul>
   </li>
-</ol>
+</ul>
 
 <h3>Evaluation Process</h3>
 
@@ -72,19 +88,16 @@
   <li><strong>Submission:</strong> Participants submit their models and code for evaluation</li>
   <li><strong>Verification:</strong> Submissions are verified for compatibility with the evaluation framework</li>
   <li><strong>Execution:</strong> Models are executed on the evaluation server using the provided datasets</li>
-  <li><strong>Metric Calculation:</strong>
+  <li><strong>Metric Calculation:</strong> Track-specific metrics are calculated as described above:
     <ul>
-      <li>Disentanglement metrics are calculated using ground truth factors</li>
-      <li>Robustness is evaluated by applying various perturbations to test inputs</li>
-      <li>Interpretability is assessed through automated proxy measures</li>
-      <li>Practical utility is measured through performance on downstream tasks</li>
+      <li>Single-Factor Track: FID and Bi-directional DCI</li>
+      <li>Multi-Factor Track - General Image Dataset (Main): LLM+VQA evaluation</li>
+      <li>Multi-Factor Track - General Image Dataset (Disentanglement): FID and Bi-directional DCI</li>
+      <li>Multi-Factor Track - Autonomous Dataset (Main): SSIM</li>
+      <li>Multi-Factor Track - Autonomous Dataset (Disentanglement): FID and Bi-directional DCI</li>
     </ul>
   </li>
-  <li><strong>Scoring:</strong> A weighted sum of the metrics determines the final score:
-    <ul>
-      <li>Total Score = 0.25 × Disentanglement + 0.25 × Robustness + 0.20 × Interpretability + 0.30 × Practical Utility</li>
-    </ul>
-  </li>
+  <li><strong>Scoring:</strong> Final scores are calculated according to the track-specific formulas</li>
 </ol>
 
 <h3>Development vs. Test Phase Evaluation</h3>
@@ -92,7 +105,7 @@
 <p><strong>Development Phase (January 15 - August 15, 2025):</strong></p>
 <ul>
   <li>Models are evaluated on validation data with known factors of variation</li>
-  <li>Feedback is provided on all four metrics to help participants improve their models</li>
+  <li>Feedback is provided on all track-specific metrics to help participants improve their models</li>
   <li>Leaderboard is private to encourage exploration of different approaches</li>
 </ul>
 
@@ -100,7 +113,8 @@
 <ul>
   <li>Models are evaluated on unseen test data with more challenging scenarios</li>
   <li>Test data includes more complex real-world examples with ambiguous factors</li>
-  <li>A generalization penalty is applied to simulate real-world deployment challenges</li>
+  <li>For the Autonomous Driving Dataset, test data includes more diverse weather conditions, lighting variations, and vehicle movements</li>
+  <li>For the General Image Dataset, test data includes more complex attribute combinations</li>
   <li>Leaderboard is public, showing the performance of all participants</li>
 </ul>
 
