@@ -48,11 +48,14 @@ This track is further divided into two sub-tracks, each with two leaderboards:
 
 ## Important Dates
 
-- **Competition Launch:** January 15, 2025
-- **Phase 1 Submission Deadline:** March 31, 2025
-- **Phase 2 Submission Deadline:** May 15, 2025
-- **Results Announcement:** June 1, 2025
-- **Workshop Date:** October 2025 (during ICCV 2025)
+- **Competition Announcement and Dataset Release:** May 25, 2025
+- **Competition Submission Deadline:** June 25, 2025
+- **Paper Submission Deadline:** June 30, 2025
+- **Notification of Competition Results:** July 1, 2025
+- **Notification of Paper Acceptance:** July 10, 2025
+- **Final Documents Submission to ICCV:** August 15, 2025
+- **Workshop and Competition Results Presentation:** October 2025 (during ICCV 2025)
+
 
 ## Paper Submissions
 
