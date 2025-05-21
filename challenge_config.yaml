@@ -10,8 +10,8 @@ submission_guidelines: templates/submission_guidelines.html
 leaderboard_description: Leaderboard for the DRL for Real competition, evaluating disentangled representation learning methods on realistic datasets. Models are ranked based on their performance in disentanglement, robustness, interpretability, and practical utility in real-world applications.
 evaluation_script: evaluation_script.zip
 remote_evaluation: False
-start_date: 2025-01-15 00:00:00
-end_date: 2025-10-31 23:59:59
+start_date: 2025-05-25 00:00:00
+end_date: 2025-6-25 23:59:59
 published: True
 tags: 
   - disentangled-representation-learning
@@ -56,8 +56,8 @@ challenge_phases:
     allowed_email_ids: []
     disable_logs: False
     is_submission_public: True
-    start_date: 2025-01-15 00:00:00
-    end_date: 2025-08-15 23:59:59
+    start_date: 2025-05-25 00:00:00
+    end_date: 2025-06-15 00:00:00
     test_annotation_file: annotations/test_annotations_devsplit.json
     codename: dev
     max_submissions_per_day: 5
@@ -103,8 +103,8 @@ challenge_phases:
     allowed_email_ids: []
     disable_logs: False
     is_submission_public: True
-    start_date: 2025-08-16 00:00:00
-    end_date: 2025-10-15 23:59:59
+    start_date: 2025-06-15 00:00:00
+    end_date: 2025-06-25 23:59:59
     test_annotation_file: annotations/test_annotations_testsplit.json
     codename: test
     max_submissions_per_day: 5
