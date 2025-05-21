@@ -1,98 +1,95 @@
-## How to create a challenge on EvalAI?
+# DRL for Real: Disentangled Representation Learning for Controllable Generation
 
-If you are looking for a simple challenge configuration that you can replicate to create a challenge on EvalAI, then you are at the right place. Follow the instructions given below to get started.
+## ICCV 2025 Workshop and Competition
 
-## Directory Structure
+### Workshop Overview
 
-```
-.
-├── README.md
-├── annotations                                 # Contains the annotations for Dataset splits
-│   ├── test_annotations_devsplit.json          # Annotations of dev split
-│   └── test_annotations_testsplit.json         # Annotations for test split
-├── challenge_data                              # Contains scripts to test the evalautaion script locally
-│   ├── challenge_1                             # Contains evaluation script for the challenge
-|        ├── __init__.py                        # Imports the main.py file for evaluation
-|        └── main.py                            # Challenge evaluation script
-│   └── __init__.py                             # Imports the modules which involve evaluation script loading
-├── challenge_config.yaml                       # Configuration file to define challenge setup
-├── evaluation_script                           # Contains the evaluation script
-│   ├── __init__.py                             # Imports the modules that involve annotations loading etc
-│   └── main.py                                 # Contains the main `evaluate()` method
-├── logo.jpg                                    # Logo image of the challenge
-├── submission.json                             # Sample submission file
-├── run.sh                                      # Script to create the challenge configuration zip to be uploaded on EvalAI website
-└── templates                                   # Contains challenge related HTML templates
-    ├── challenge_phase_1_description.html      # Challenge Phase 1 description template
-    ├── challenge_phase_2_description.html      # Challenge Phase 2 description template
-    ├── description.html                        # Challenge description template
-    ├── evaluation_details.html                 # Contains description about how submissions will be evalauted for each challenge phase
-    ├── submission_guidelines.html              # Contains information about how to make submissions to the challenge
-    └── terms_and_conditions.html               # Contains terms and conditions related to the challenge
-├── worker                                      # Contains the scripts to test evaluation script locally
-│   ├── __init__.py                             # Imports the module that ionvolves loading evaluation script
-│   └── run.py                                  # Contains the code to run the evaluation locally
-```
+Disentangled representation learning (DRL) is believed to be one of the possible ways for AI to fundamentally understand the world, which potentially helps alleviate wicked problems like hallucination issues in Large Multimodal Models (LMMs/MLLMs) and controllability issues in Generative Models, ultimately contributing to progress toward Artificial General Intelligence (AGI). Over the years, disentangled representation learning has garnered significant academic interest and research contributions, recognized for its ability to improve model robustness, interpretability, and controllable generation capabilities.
 
-## Create challenge using github
+However, the field currently faces a notable gap: the lack of comprehensive, realistic benchmarks and unified evaluation metrics that reflect real-world characteristics. This limitation has kept DRL confined mostly to synthetic toy scenarios, making it difficult to apply to more practical controllable generation applications where it could have significant impact.
 
-1. Use this repository as [template](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
+### Competition Overview
 
-2. Generate your [github personal acccess token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) and copy it in clipboard.
+To further promote the practical utility and real-world applicability of Disentangled Representation Learning, we are organizing this competition as part of the DRL for Real ICCV 2025 Workshop. The primary goal is to promote the development and evaluation of DRL methods on realistic datasets, thereby accelerating the transition of disentangled models from theoretical research to practical applications.
 
-3. Add the github personal access token in the forked repository's [secrets](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) with the name `AUTH_TOKEN`.
+## Competition Tracks
 
-4. Now, go to [EvalAI](https://eval.ai) to fetch the following details -
-   1. `evalai_user_auth_token` - Go to [profile page](https://eval.ai/web/profile) after logging in and click on `Get your Auth Token` to copy your auth token.
-   2. `host_team_pk` - Go to [host team page](https://eval.ai/web/challenge-host-teams) and copy the `ID` for the team you want to use for challenge creation.
-   3. `evalai_host_url` - Use `https://eval.ai` for production server and `https://staging.eval.ai` for staging server.
+The competition is divided into two main tracks:
 
-5. Create a branch with name `challenge` in the forked repository from the `master` branch.
-<span style="color:purple">Note: Only changes in `challenge` branch will be synchronized with challenge on EvalAI.</span>
+### 1. Single-Factor Track
 
-6. Add `evalai_user_auth_token` and `host_team_pk` in `github/host_config.json`.
+This track focuses on disentangled representation learning for single-factor variations in images. The dataset includes over 10,000 images covering multiple scenes, dozens of objects, and hundreds of factors of variation.
 
-7. Read [EvalAI challenge creation documentation](https://evalai.readthedocs.io/en/latest/configuration.html) to know more about how you want to structure your challenge. Once you are ready, start making changes in the yaml file, HTML templates, evaluation script according to your need.
+- **Dataset:** High-quality images with controlled single-factor variations
+- **Requirement:** Participants must use disentangled models in this track
+- **Evaluation:**
+  - *Image Generation Quality (50%):* Measured using FID (Fréchet Inception Distance)
+  - *Disentanglement Quality (50%):* Evaluated using Bi-directional DCI, which extends the traditional DCI metric by also measuring how perturbations in real images affect the corresponding latent variables in the encoder
 
-8. Commit the changes and push the `challenge` branch in the repository and wait for the build to complete. View the [logs of your build](https://docs.github.com/en/free-pro-team@latest/actions/managing-workflow-runs/using-workflow-run-logs#viewing-logs-to-diagnose-failures).
+### 2. Multi-Factor Track
 
-9. If challenge config contains errors then a `issue` will be opened automatically in the repository with the errors otherwise the challenge will be created on EvalAI.
+This track is further divided into two sub-tracks, each with two leaderboards:
 
-10. Go to [Hosted Challenges](https://eval.ai/web/hosted-challenges) to view your challenge. The challenge will be publicly available once EvalAI admin approves the challenge.
+#### 2.1 General Image Dataset
 
-11. To update the challenge on EvalAI, make changes in the repository and push on `challenge` branch and wait for the build to complete.
+- **Main Leaderboard:** Open to all methods (not restricted to disentangled approaches)
+- **Disentanglement Leaderboard:** Only for disentangled methods
+- **Evaluation for Main Leaderboard:** Uses LLM+VQA evaluation approach:
+  - VQA assessment of whether models correctly generate images with attributes specified in given text
+  - LLM evaluation of attribute strength in generated images
+  - Comparison between text-specified attribute changes and LLM-detected attribute changes, with scores closer to 1 indicating better performance (minimal unintended attribute changes)
+- **Evaluation for Disentanglement Leaderboard:** Same metrics as the Single-Factor Track (FID and Bi-directional DCI)
 
-## Create challenge using config
+#### 2.2 Autonomous Driving Dataset
 
-1. Fork this repository.
+- **Main Leaderboard:** Open to all methods
+- **Disentanglement Leaderboard:** Only for disentangled methods
+- **Evaluation:** Similar to the General Image Dataset track, with domain-specific metrics
 
-2. Read [EvalAI challenge creation documentation](https://evalai.readthedocs.io/en/latest/configuration.html) to know more about how you want to structure your challenge. Once you are ready, start making changes in the yaml file, HTML templates, evaluation script according to your need.
+## Important Dates
 
-3. Once you are done making changes, run the command `./run.sh` to generate the `challenge_config.zip`.
+- **Competition Launch:** January 15, 2025
+- **Phase 1 Submission Deadline:** March 31, 2025
+- **Phase 2 Submission Deadline:** May 15, 2025
+- **Results Announcement:** June 1, 2025
+- **Workshop Date:** October 2025 (during ICCV 2025)
 
-4. Upload the `challenge_config.zip` on [EvalAI](https://eval.ai) to create a challenge on EvalAI. Challenge will be available publicly once EvalAI Admin approves the challenge.
+## Paper Submissions
 
-5. To update the challenge on EvalAI, use the UI to update the details.
+In addition to the competition, we welcome paper submissions related to disentangled representation learning, particularly those addressing:
 
-## Test your evaluation script locally
+- Novel disentanglement methods for real-world data
+- Applications of disentangled representations in controllable generation
+- Evaluation metrics for disentanglement quality
+- Theoretical advances in understanding disentanglement
 
-In order to test the evaluation script locally before uploading it to [EvalAI](https://eval.ai) server, please follow the below instructions -
+**Submission Deadline:** July 15, 2025
 
-1. Copy the evaluation script i.e `__init__.py` , `main.py` and other relevant files from `evaluation_script/` directory to `challenge_data/challenge_1/` directory.
+## Organizers
 
-2. Now, edit `challenge_phase` name, `annotation file` name and `submission file` name in the `worker/run.py` file to the challenge phase codename (which you want to test for), annotation file name in the `annotations/` folder (for specific phase) and corresponding submission file respectively.
+- Xin Jin, Professor, Eastern Institute of Technology, Ningbo, China
+- Qiuyu Chen, Ph.D., Shanghai Jiao Tong University, Shanghai, China
+- Yue Song, Professor, California Institute of Technology (Caltech), USA
+- Xihui Liu, Professor, The University of Hong Kong, Hong Kong, China
+- Shuai Yang, Professor, Peking University, Beijing, China
+- Tao Yang, Dr., Xi'an Jiaotong University, Xi'an, China
+- Ziqiang Li, Ph.D., Shanghai Jiao Tong University, Shanghai, China
+- Jianguo Huang, Ph.D., Eastern Institute of Technology, Ningbo, China
+- Yuntao Wei, Ph.D., The Hong Kong Polytechnic University, Hong Kong, China
+- Ba'ao Xie, Professor, Eastern Institute of Technology, Ningbo, China
+- Nicu Sebe, Professor, Fellow of IAPR, University of Trento, Italy
+- Wenjun (Kevin) Zeng, Professor, IEEE Fellow, Eastern Institute of Technology, Ningbo, China
 
-3. Run the command `python -m worker.run` from the directory where `annotations/` `challenge_data/` and `worker/` directories are present. If the command runs successfully, then the evaluation script works locally and will work on the server as well.
+## Assistance
 
-## Important Note
-`host_config.json` file includes default placeholders like:
+- Zhenyu Hu, Engineer, Institute of Digital Twin, EIT, Ningbo, China
 
-- `<evalai_user_auth_token>`
-- `<host_team_pk>`
-- `<evalai_host_url>`
+## Contact
 
-Please replace them with real values before pushing changes to avoid build errors.
+For any questions regarding the workshop or competition, please contact:
+- Xin Jin (jinxin@eitech.edu.cn), Professor, Eastern Institute of Technology, Ningbo, China
+- Qiuyu Chen (canghaimeng@sjtu.edu.cn), Ph.D., Shanghai Jiao Tong University, Shanghai, China
 
-## Facing problems in creating a challenge?
+---
 
-Please feel free to open issues on our [GitHub Repository](https://github.com/Cloud-CV/EvalAI-Starter/issues) or contact us at team@cloudcv.org if you have issues.
+*This workshop and competition are organized in collaboration with leading research institutions and industry partners committed to advancing the field of disentangled representation learning.*
