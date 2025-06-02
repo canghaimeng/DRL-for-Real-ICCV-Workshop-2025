@@ -9,10 +9,10 @@ from evaluate import evaluate
 
 # Remote Evaluation Meta Data
 # See https://evalai.readthedocs.io/en/latest/evaluation_scripts.html#writing-remote-evaluation-script
-auth_token = os.environ["AUTH_TOKEN"]
-evalai_api_server = os.environ["API_SERVER"]
-queue_name = os.environ["QUEUE_NAME"]
-challenge_pk = os.environ["CHALLENGE_PK"]
+auth_token = os.environ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3OTI2NTgwOCwianRpIjoiYTdkZjA2N2ViMjJmNDNlMWE2ODhlZWEzZjk2YzcyZjgiLCJ1c2VyX2lkIjo1NDQ5MH0.eJwj13Du27pGGEYgXfjx8LARLcGbo1NhM4bkCBGQYSc"]
+evalai_api_server = os.environ["https://eval.ai"]
+queue_name = os.environ["random-number-generator-challenge-2527-production-52103605-e9f3-4620-bfba-aa83c3"]
+challenge_pk = os.environ["2527"]
 save_dir = os.environ.get("SAVE_DIR", "./")
 
 
