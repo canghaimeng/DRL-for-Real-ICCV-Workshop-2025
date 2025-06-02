@@ -9,7 +9,7 @@ image: logo.jpg
 submission_guidelines: templates/submission_guidelines.html
 leaderboard_description: Leaderboard for the DRL for Real competition, evaluating disentangled representation learning methods on realistic datasets. Models are ranked based on their performance in disentanglement, robustness, interpretability, and practical utility in real-world applications.
 evaluation_script: evaluation_script.zip
-remote_evaluation: False
+remote_evaluation: True
 start_date: 2025-05-31 00:00:00
 end_date: 2025-6-30 23:59:59
 published: True
