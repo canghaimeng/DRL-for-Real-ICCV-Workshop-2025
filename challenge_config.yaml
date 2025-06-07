@@ -60,7 +60,7 @@ challenge_phases:
     end_date: 2025-06-23 00:00:00
     test_annotation_file: annotations/test_annotations_devsplit.json
     codename: dev
-    max_submissions_per_day: 3
+    max_submissions_per_day: 50
     max_submissions_per_month: 50
     max_submissions: 50
     default_submission_meta_attributes:
@@ -107,7 +107,7 @@ challenge_phases:
     end_date: 2025-06-30 23:59:59
     test_annotation_file: annotations/test_annotations_testsplit.json
     codename: test
-    max_submissions_per_day: 5
+    max_submissions_per_day: 50
     max_submissions_per_month: 50
     max_submissions: 50
     default_submission_meta_attributes:
