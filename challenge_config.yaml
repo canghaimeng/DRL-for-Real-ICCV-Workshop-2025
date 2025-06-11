@@ -73,22 +73,23 @@ challenge_phases:
       - name: publication_url
         is_visible: True
     submission_meta_attributes:
-      - name: TextAttribute
-        description: Sample
-        type: text
-        required: False
+      # - name: TextAttribute
+      #   description: Sample
+      #   type: text
+      #   required: False
       - name: SingleOptionAttribute
         description: Sample
         type: radio
-        options: ["A", "B", "C"]
-      - name: MultipleChoiceAttribute
-        description: Sample
-        type: checkbox
-        options: ["alpha", "beta", "gamma"]
-      - name: TrueFalseField
-        description: Sample
-        type: boolean
+        options: ["AutoDrive", "ImageEditing", "Disentanglement"]
         required: True
+      # - name: MultipleChoiceAttribute
+      #   description: Sample
+      #   type: checkbox
+      #   options: ["alpha", "beta", "gamma"]
+      # - name: TrueFalseField
+      #   description: Sample
+      #   type: boolean
+      #   required: True
     is_restricted_to_select_one_submission: False
     is_partial_submission_evaluation_enabled: False
     allowed_submission_file_types: ".json, .zip, .txt, .tsv, .gz, .csv, .h5, .npy, .npz"
@@ -120,17 +121,17 @@ challenge_phases:
       - name: publication_url
         is_visible: True
     submission_meta_attributes:
-      - name: TextAttribute
-        description: Sample
-        type: text
+      # - name: TextAttribute
+      #   description: Sample
+      #   type: text
       - name: SingleOptionAttribute
         description: Sample
         type: radio
         options: ["A", "B", "C"]
-      - name: MultipleChoiceAttribute
-        description: Sample
-        type: checkbox
-        options: ["alpha", "beta", "gamma"]
+      # - name: MultipleChoiceAttribute
+      #   description: Sample
+      #   type: checkbox
+      #   options: ["alpha", "beta", "gamma"]
       - name: TrueFalseField
         description: Sample
         type: boolean
