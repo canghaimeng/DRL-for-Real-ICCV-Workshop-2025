@@ -1,91 +1,307 @@
 <h2>Submission Guidelines for DRL for Real Competition</h2>
 
-<p>This competition focuses on developing and evaluating disentangled representation learning (DRL) methods for controllable generation. The competition is divided into two main tracks: Single-Factor and Multi-Factor. Participants are expected to submit their models and results following these guidelines:</p>
+<p>This competition focuses on developing and evaluating disentangled representation learning (DRL) methods for controllable generation. The competition is divided into two main tracks: Single-Factor and Multi-Factor. Participants are expected to submit their models and results following these guidelines.</p>
 
-<h3>Track-Specific Submission Requirements</h3>
+<div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; margin: 20px 0;">
+  <h4 style="color: #007bff; margin-top: 0;">📋 Submission File Overview</h4>
+  <p>Each track requires specific file formats and content. Please carefully read the specific requirements for your participating track to ensure your submission is complete and compliant.</p>
+</div>
+
+<h3>🎯 Track-Specific Submission Requirements</h3>
 
 <h4>1. Single-Factor Track</h4>
-<ol>
-  <li><strong>Model Submission</strong>: Submit your disentangled model along with the code used for training and evaluation. The model must be capable of learning disentangled representations from the provided single-factor variation dataset.</li>
-  <li><strong>Documentation</strong>: Include a detailed description of your approach, highlighting how your method achieves disentanglement for single-factor variations.</li>
-  <li><strong>Results</strong>: Provide quantitative results on FID and Bi-directional DCI metrics.</li>
-  <li><strong>Visualization</strong>: Include visualizations that demonstrate the disentangled nature of your learned representations and the quality of generated images.</li>
-</ol>
+
+<div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <h5>📁 Required Files</h5>
+  <p>Participants must submit batch traversal results based on test set prompts and images, following the test set structure:</p>
+  <ul>
+    <li><strong>Traversal Results:</strong> scene-object-factor three-level directory structure</li>
+    <li><strong>Factor Folders:</strong> Named as traversal_001, traversal_002, etc. (since disentangled models cannot determine factor text descriptions)</li>
+    <li><strong>Latent Variable Files:</strong> Corresponding latent variable values for each traversal image</li>
+    <li><strong>cal_biDCI Results:</strong> Encoded latent variables for each image in the cal_biDCI folder</li>
+  </ul>
+  
+  <h5>📋 File Format</h5>
+  <p>Detailed format requirements for Single-Factor track submissions:</p>
+  <ul>
+    <li><strong>Directory Structure:</strong> scene/object/factor hierarchy matching test set</li>
+    <li><strong>Traversal Folders:</strong> Each traversal_XXX folder contains reconstruction results from traversing latent variables in one dimension</li>
+    <li><strong>Image Files:</strong> Reconstructed images from latent variable traversal</li>
+    <li><strong>Latent Files:</strong> Corresponding latent variable values for each image (must maintain order correspondence)</li>
+    <li><strong>cal_biDCI:</strong> Encoded latent variables for images in cal_biDCI folder (order must match image sequence)</li>
+  </ul>
+  
+  <h5>💡 Content Examples</h5>
+  <p>Example submission structure for Single-Factor track:</p>
+  <pre><code>submission/
+├── animal_scene/
+│   ├── generated_images_cat/
+│   │   ├── traversal_001/
+│   │   │   ├── reconstructed_image_1.png
+│   │   │   ├── reconstructed_image_2.png
+│   │   │   ├── ...
+│   │   │   ├── reconstructed_image_20.png
+│   │   │   └── latent_values.npy
+│   │   ├── traversal_002/
+│   │   │   ├── reconstructed_image_1.png
+│   │   │   ├── reconstructed_image_2.png
+│   │   │   ├── ...
+│   │   │   ├── reconstructed_image_20.png
+│   │   │   └── latent_values.npy
+│   │   └── ...
+│   └── ...
+└── cal_biDCI/
+    ├── encoded_latents_cat.npy
+    └── ...</code></pre>
+</div>
 
 <h4>2. Multi-Factor Track - General Image Dataset</h4>
-<ol>
-  <li><strong>Model Submission</strong>: Submit your model along with the code used for training and evaluation.</li>
-  <li><strong>Documentation</strong>: Include a detailed description of your approach, specifying whether you're targeting the Main Leaderboard, the Disentanglement Leaderboard, or both.</li>
-  <li><strong>Results</strong>: 
-    <ul>
-      <li>For Main Leaderboard: Provide examples of text-to-image generation with controlled attribute manipulation</li>
-      <li>For Disentanglement Leaderboard: Provide quantitative results on FID and Bi-directional DCI metrics</li>
-    </ul>
-  </li>
-  <li><strong>Visualization</strong>: Include visualizations that demonstrate your model's ability to generate images with specific attribute changes.</li>
-</ol>
+
+<div style="background-color: #d1ecf1; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <h5>🏆 Main Leaderboard Submission Requirements</h5>
+  <p>Participants only need to submit generated image files organized in the following structure:</p>
+  <ul>
+    <li><strong>Generated Images:</strong> Only image files are required for submission</li>
+    <li><strong>Directory Structure:</strong> scene-object-factor three-level hierarchy</li>
+    <li><strong>Factor Naming:</strong> Factor folder names must match the corresponding group names in prompts</li>
+    <li><strong>Group Correspondence:</strong> Maintain consistency between folder names and prompt groups (e.g., Group 0001: eyes color_fur color)</li>
+  </ul>
+  
+  <h5>🔬 Disentanglement Leaderboard Submission Requirements</h5>
+  <p>In addition to the main leaderboard requirements, participants must also submit:</p>
+  <ul>
+    <li><strong>Generated Images:</strong> Same as main leaderboard requirements</li>
+    <li><strong>Latent Variables:</strong> NPZ files containing latent variables for each generated image</li>
+    <li><strong>File Organization:</strong> Latent variable files should be organized alongside corresponding images</li>
+    <li><strong>File Format:</strong> Use .npz format to save latent variables for all generated images together</li>
+  </ul>
+  
+  <h5>📝 File Format Requirements</h5>
+  <p>Detailed format requirements for Multi-Factor General Image Dataset track:</p>
+  <ul>
+    <li><strong>Directory Structure:</strong> scene/object/factor three-level organization</li>
+    <li><strong>Scene Folders:</strong> Named according to scene categories (e.g., animal_scene)</li>
+    <li><strong>Object Folders:</strong> Named as generated_images_[object] (e.g., generated_images_cat)</li>
+    <li><strong>Factor Folders:</strong> Named as traversal_XXX, corresponding to prompt group names</li>
+    <li><strong>Image Files:</strong> Generated images placed within factor folders</li>
+  </ul>
+  
+  <h5>💡 Submission Content Examples</h5>
+  <p>Example submission structure for Multi-Factor General Image Dataset track:</p>
+   <pre><code>submission/
+├── animal_scene/
+│   ├── generated_images_cat/
+│   │   ├── Group 0001: eyes color_fur color/
+│   │   │   ├── generated_image_001.png
+│   │   │   ├── generated_image_002.png
+│   │   │   ├── latent_variables.npz  # For disentanglement track
+│   │   │   └── ...
+│   │   ├── Group 0002: head status_tail length/
+│   │   │   ├── generated_image_001.png
+│   │   │   ├── latent_variables.npz  # For disentanglement track
+│   │   │   └── ...
+│   │   └── ...
+│   ├── generated_images_dog/
+│   │   └── ...
+│   └── ...
+└── ...</code></pre>
+   <p><strong>Note:</strong> Factor folder names (traversal_XXX) should correspond to prompt groups like "Group 0001: eyes color_fur color"</p>
+   <p><strong>Disentanglement Track:</strong> Include latent_variables.npz files containing latent variables for all generated images in each traversal folder</p>
+</div>
 
 <h4>3. Multi-Factor Track - Autonomous Driving Dataset</h4>
-<ol>
-  <li><strong>Model Submission</strong>: Submit your model along with the code used for training and evaluation.</li>
-  <li><strong>Documentation</strong>: Include a detailed description of your approach, specifying whether you're targeting the Main Leaderboard, the Disentanglement Leaderboard, or both.</li>
-  <li><strong>Results</strong>: 
-    <ul>
-      <li>For Main Leaderboard: Provide examples of cross-view image generation and SSIM scores</li>
-      <li>For Disentanglement Leaderboard: Provide quantitative results on FID and Bi-directional DCI metrics</li>
-    </ul>
-  </li>
-  <li><strong>Visualization</strong>: Include visualizations that demonstrate your model's ability to generate images from different camera viewpoints and time points.</li>
-</ol>
 
-<h3>Evaluation Criteria</h3>
+<div style="background-color: #d4edda; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <h5>🏆 Main Leaderboard Submission Requirements</h5>
+  <p>Participants must submit reconstructed images following the test dataset structure:</p>
+  <ul>
+    <li><strong>Reconstructed Images:</strong> Only need to reconstruct missing viewpoints</li>
+    <li><strong>Image Count:</strong> 100 images per viewpoint (0000.png ~ 0099.png)</li>
+    <li><strong>Directory Structure:</strong> Must match test dataset organization</li>
+    <li><strong>Scene Categories:</strong> Speed-related and weather-related scenarios</li>
+  </ul>
+  
+  <h5>🔬 Disentanglement Leaderboard Submission Requirements</h5>
+  <p>In addition to the main leaderboard requirements, participants must also submit:</p>
+  <ul>
+    <li><strong>Reconstructed Images:</strong> Same as main leaderboard requirements</li>
+    <li><strong>Latent Variables:</strong> NPZ files containing latent variables for each reconstructed image</li>
+    <li><strong>File Organization:</strong> Latent variable files should be organized alongside corresponding images</li>
+    <li><strong>File Format:</strong> Use .npz format to save latent variables for all reconstructed images together</li>
+  </ul>
+  
+  <h5>📝 File Format Requirements</h5>
+  <p>Detailed format requirements for Multi-Factor Autonomous Driving Dataset track:</p>
+  <ul>
+    <li><strong>Root Directory:</strong> data_reconstruction_resized/</li>
+    <li><strong>Speed Scenarios:</strong> accelerate/, constant/, decelerate/</li>
+    <li><strong>Weather Scenarios:</strong> clear/, fog/, light/, rain/</li>
+    <li><strong>Location Structure:</strong> location_X/viewpoint/frames/</li>
+    <li><strong>Image Files:</strong> PNG format, numbered 0000.png to 0099.png</li>
+    <li><strong>Disentanglement Track:</strong> NPZ files containing latent variables for each viewpoint (one NPZ file per viewpoint)</li>
+  </ul>
+  
+  <h5>💡 Submission Content Examples</h5>
+  <p>Example submission structure for Multi-Factor Autonomous Driving Dataset track:</p>
+  <pre><code>data_reconstruction_resized/
+├── README.md
+├── speed/
+│   ├── accelerate/
+│   │   ├── location_0/
+│   │   │   └── left/
+│   │   │       ├── frames/
+│   │   │       │   ├── 0000.png
+│   │   │       │   ├── 0001.png
+│   │   │       │   └── ... (up to 0099.png)
+│   │   │       └── latent_variables.npz  # For disentanglement track
+│   │   ├── location_1/
+│   │   │   ├── front/
+│   │   │   │   ├── frames/
+│   │   │   │   │   ├── 0000.png ~ 0099.png
+│   │   │   │   └── latent_variables.npz  # For disentanglement track
+│   │   │   └── right/
+│   │   │       ├── frames/
+│   │   │       │   ├── 0000.png ~ 0099.png
+│   │   │       └── latent_variables.npz  # For disentanglement track
+│   │   └── location_2/
+│   │       └── front/
+│   │           └── ...
+│   ├── constant/
+│   └── decelerate/
+└── weather/
+    ├── clear/
+    ├── fog/
+    ├── light/
+    └── rain/</code></pre>
+  <p><strong>Note:</strong> Only reconstruct missing viewpoints as specified in the test dataset</p>
+  <p><strong>Disentanglement Track:</strong> Each viewpoint directory should contain a <code>latent_variables.npz</code> file with latent variables for all images in that viewpoint (both reconstructed and original test set images)</p>
+</div>
 
-<p>Submissions will be evaluated based on track-specific criteria:</p>
+<h4>4. Multi-Factor Track - Autonomous Driving Dataset (Disentanglement Leaderboard)</h4>
 
-<ul>
-  <li><strong>Single-Factor Track:</strong>
-    <ul>
-      <li><em>Image Generation Quality (50%):</em> Measured using FID</li>
-      <li><em>Disentanglement Quality (50%):</em> Evaluated using Bi-directional DCI</li>
-    </ul>
-  </li>
-  <li><strong>Multi-Factor Track - General Image Dataset:</strong>
-    <ul>
-      <li><em>Main Leaderboard:</em> LLM+VQA evaluation approach</li>
-      <li><em>Disentanglement Leaderboard:</em> FID (50%) and Bi-directional DCI (50%)</li>
-    </ul>
-  </li>
-  <li><strong>Multi-Factor Track - Autonomous Driving Dataset:</strong>
-    <ul>
-      <li><em>Main Leaderboard:</em> SSIM between generated images and ground truth</li>
-      <li><em>Disentanglement Leaderboard:</em> FID (50%) and Bi-directional DCI (50%)</li>
-    </ul>
-  </li>
-</ul>
+<div style="background-color: #f8d7da; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <h5>📁 Required Files</h5>
+  <p>In addition to the main leaderboard submission requirements, participants must also submit:</p>
+  <ul>
+    <li><strong>All Main Track Files:</strong> Complete submission from Multi-Factor Autonomous Driving Dataset main track</li>
+    <li><strong>Latent Variable NPZ Files:</strong> One NPZ file per viewpoint containing latent variables</li>
+    <li><strong>Coverage:</strong> Include latent variables for both reconstructed images and original test set images</li>
+    <li><strong>File Placement:</strong> NPZ files saved in corresponding viewpoint directories</li>
+  </ul>
+  
+  <h5>📄 File Format</h5>
+  <p>Detailed format requirements for Autonomous Driving Disentanglement track:</p>
+  <ul>
+    <li><strong>Main Track Structure:</strong> Same directory structure as main leaderboard</li>
+    <li><strong>NPZ File Naming:</strong> <code>latent_variables.npz</code> in each viewpoint directory</li>
+    <li><strong>NPZ Content:</strong> Latent variables for all 100 images in the viewpoint</li>
+    <li><strong>Variable Organization:</strong> Array format matching image sequence order</li>
+    <li><strong>Image Coverage:</strong> Include variables for both reconstructed and existing test images</li>
+  </ul>
+  
+  <h5>💡 Content Examples</h5>
+  <p>Example submission structure for Autonomous Driving Disentanglement track:</p>
+  <pre><code>data_reconstruction_resized/
+├── README.md
+├── speed/
+│   ├── accelerate/
+│   │   ├── location_0/
+│   │   │   └── left/
+│   │   │       ├── frames/
+│   │   │       │   ├── 0000.png
+│   │   │       │   ├── 0001.png
+│   │   │       │   └── ... (up to 0099.png)
+│   │   │       └── latent_variables.npz  # Contains latent variables for all 100 images
+│   │   ├── location_1/
+│   │   │   ├── front/
+│   │   │   │   ├── frames/
+│   │   │   │   │   ├── 0000.png ~ 0099.png
+│   │   │   │   └── latent_variables.npz  # Contains latent variables for all 100 images
+│   │   │   └── right/
+│   │   │       ├── frames/
+│   │   │       │   ├── 0000.png ~ 0099.png
+│   │   │       └── latent_variables.npz  # Contains latent variables for all 100 images
+│   │   └── location_2/
+│   │       └── front/
+│   │           ├── frames/
+│   │           │   ├── 0000.png ~ 0099.png
+│   │           └── latent_variables.npz  # Contains latent variables for all 100 images
+│   ├── constant/
+│   └── decelerate/
+└── weather/
+    ├── clear/
+    ├── fog/
+    ├── light/
+    └── rain/</code></pre>
+  <p><strong>Important:</strong> Each <code>latent_variables.npz</code> file should contain latent variables for all images in that viewpoint, whether they are reconstructed images or original images from the test dataset.</p>
+</div>
 
-<h3>Submission Format</h3>
+<h3>📊 Evaluation Criteria</h3>
 
-<p>Please submit your files in one of the following formats: .zip, .tar.gz, or through a GitHub repository link. Ensure that your submission includes all necessary code, models, and documentation as specified above. Clearly indicate which track(s) and leaderboard(s) you are submitting to.</p>
+<div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <p>Submissions will be evaluated based on track-specific criteria. For detailed evaluation metrics and weight distributions, please refer to the <strong>Evaluation Details</strong> page.</p>
+  
+  <h4>Quick Reference:</h4>
+  <ul>
+    <li><strong>Single-Factor Track:</strong> Image Generation Quality (FID, 50%) + Disentanglement Quality (Bi-directional DCI, 50%)</li>
+    <li><strong>Multi-Factor Track - General Image:</strong> Main Leaderboard (LLM+VQA evaluation) / Disentanglement Leaderboard (FID + Bi-directional DCI)</li>
+    <li><strong>Multi-Factor Track - Autonomous Driving:</strong> Main Leaderboard (SSIM evaluation) / Disentanglement Leaderboard (FID + Bi-directional DCI)</li>
+  </ul>
+</div>
 
-<h3>Important Dates</h3>
+<h3>📦 General Submission Format Requirements</h3>
 
-<ul>
-  <li><strong>May 31, 2025, 23:59:59 AOE:</strong> Workshop Announcement and Training & Validation Dataset Release</li>
-  <li><strong>June 23, 2025, 23:59:59 AOE:</strong> Final Test Dataset Release</li>
-  <li><strong>June 30, 2025, 23:59:59 AOE:</strong> Competition Submission Deadline</li>
-  <li><strong>July 3, 2025, 23:59:59 AOE:</strong> Notification of Competition Results</li>
-  <li><strong>October 19, 2025:</strong> Workshop and Competition Results Presentation at ICCV 2025 in Hawaii</li>
-</ul>
+<div style="background-color: #e2e3e5; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <h4>Supported Submission Methods:</h4>
+  <ul>
+    <li>📁 Compressed files: <code>.zip</code> or <code>.tar.gz</code> format</li>
+    <li>🔗 GitHub repository link (recommended)</li>
+    <li>☁️ Other cloud storage links (ensure access permissions)</li>
+  </ul>
+  
+  <h4>⚠️ Important Reminders:</h4>
+  <ul>
+    <li>Clearly indicate which track(s) and leaderboard(s) you are participating in</li>
+    <li>Ensure all required files are included in your submission</li>
+    <li>Carefully check file formats and naming conventions before submission</li>
+    <li>Large files are recommended to be submitted via cloud storage links</li>
+  </ul>
+</div>
 
-<h3>Paper Submission</h3>
+<h3>📋 Submission Checklist</h3>
 
-<p>In addition to the competition, we are also accepting paper submissions related to disentangled representation learning. Accepted papers will be included in the ICCV 2025 proceedings. Important dates for paper submission:</p>
+<div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <p><em>A detailed submission checklist will be provided here to help participants ensure complete submissions...</em></p>
+</div>
 
-<ul>
-  <li><strong>June 28, 2025, 23:59:59 AOE:</strong> Workshop Paper Deadline</li>
-  <li><strong>July 7, 2025, 23:59:59 AOE:</strong> Challenge Paper Deadline</li>
-  <li><strong>July 11, 2025, 23:59:59 AOE:</strong> Notification of Paper Acceptance</li>
-  <li><strong>August 15, 2025, 23:59:59 AOE:</strong> Camera Ready Paper Deadline</li>
-</ul>
+<h3>📅 Important Dates</h3>
 
-<p>The top three teams from each leaderboard will be invited to present their approaches at the workshop in Hawaii, providing an opportunity to share detailed insights about their methods with the research community.</p>
+<div style="background-color: #d1ecf1; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <h4>🏁 Competition Timeline</h4>
+  <ul>
+    <li><strong>May 31, 2025, 23:59:59 AOE:</strong> Workshop Announcement and Training & Validation Dataset Release</li>
+    <li><strong>June 23, 2025, 23:59:59 AOE:</strong> Final Test Dataset Release</li>
+    <li><strong>June 30, 2025, 23:59:59 AOE:</strong> Competition Submission Deadline</li>
+    <li><strong>July 3, 2025, 23:59:59 AOE:</strong> Notification of Competition Results</li>
+    <li><strong>October 19, 2025:</strong> Workshop and Competition Results Presentation at ICCV 2025 in Hawaii</li>
+  </ul>
+</div>
+
+<h3>📝 Paper Submission</h3>
+
+<div style="background-color: #d4edda; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <p>In addition to the competition, we are also accepting paper submissions related to disentangled representation learning. Accepted papers will be included in the ICCV 2025 proceedings.</p>
+  
+  <h4>📄 Paper Submission Timeline</h4>
+  <ul>
+    <li><strong>June 28, 2025, 23:59:59 AOE:</strong> Workshop Paper Deadline</li>
+    <li><strong>July 7, 2025, 23:59:59 AOE:</strong> Challenge Paper Deadline</li>
+    <li><strong>July 11, 2025, 23:59:59 AOE:</strong> Notification of Paper Acceptance</li>
+    <li><strong>August 15, 2025, 23:59:59 AOE:</strong> Camera Ready Paper Deadline</li>
+  </ul>
+</div>
+
+<div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; margin: 15px 0;">
+  <h4>🏆 Award Presentation Opportunity</h4>
+  <p>The top three teams from each leaderboard will be invited to present their approaches at the workshop in Hawaii, providing an excellent opportunity to share detailed technical insights with the research community.</p>
+</div>
